@@ -57,26 +57,14 @@
 	
 	var _router2 = _interopRequireDefault(_router);
 	
-	var _appComponent = __webpack_require__(/*! ./components/app-component/app-component */ 3);
+	var _routes = __webpack_require__(/*! ./routes */ 3);
 	
-	var _appComponent2 = _interopRequireDefault(_appComponent);
+	var _routes2 = _interopRequireDefault(_routes);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var UserProfile = { template: '<div>Profile</div>' };
-	
-	var router = new _router2.default({
-	    routes: [{
-	        path: '/user/id:',
-	        component: _appComponent2.default,
-	        children: [{
-	            path: 'profile',
-	            component: UserProfile
-	        }]
-	    }]
-	});
-	
-	new _vue2.default({ router: router }).$mount('#app');
+	_vue2.default.use(_router2.default);
+	var app = new _vue2.default({ routes: _routes2.default }).$mount('#app');
 
 /***/ },
 /* 1 */
@@ -109,9 +97,9 @@
 
 /***/ },
 /* 3 */
-/*!***********************************************************!*\
-  !*** ./src/app/components/app-component/app-component.js ***!
-  \***********************************************************/
+/*!***************************!*\
+  !*** ./src/app/routes.js ***!
+  \***************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -120,17 +108,39 @@
 	    value: true
 	});
 	
-	var _vue = __webpack_require__(/*! vue */ 1);
+	var _router = __webpack_require__(/*! router */ 2);
 	
-	var _vue2 = _interopRequireDefault(_vue);
+	var _router2 = _interopRequireDefault(_router);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var AppComponent = _vue2.default.extend({
-	    template: '<h1>Hello {{ $route.params.id }}!</h1>'
+	var User = {
+	    template: '<div class="user">\n      <h2>User {{ $route.params.id }}</h2>\n      <router-view></router-view>\n    </div>\n  '
+	};
+	
+	var UserHome = { template: '<div>Home</div>' };
+	var UserProfile = { template: '<div>Profile</div>' };
+	var UserPosts = { template: '<div>Posts</div>' };
+	
+	var router = new _router2.default({
+	    mode: 'history',
+	    routes: [{
+	        path: '/user/:id',
+	        component: User,
+	        children: [{
+	            path: '',
+	            component: UserHome
+	        }, {
+	            path: 'profile',
+	            component: UserProfile
+	        }, {
+	            path: 'posts',
+	            component: UserPosts
+	        }]
+	    }]
 	});
 	
-	exports.default = AppComponent;
+	exports.default = router;
 
 /***/ }
 /******/ ]);
