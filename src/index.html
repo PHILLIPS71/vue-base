@@ -2,13 +2,20 @@
 <html>
 
 <head>
-    <title>Vue Twitter Streaming</title>
+    <title>Vue JS Example</title>
 </head>
 
 <body>
     <div id="app">
-        <app-component></app-component>
+        <p>
+            <router-link to="/user/foo">/user/foo</router-link>
+            <router-link to="/user/foo/profile">/user/foo/profile</router-link>
+            <router-link to="/user/foo/posts">/user/foo/posts</router-link>
+        </p>
+
+        <router-view></router-view>
     </div>
+
     <script src="app/bundle.js"></script>
 </body>
 
